@@ -32,7 +32,7 @@ namespace lab03
                 //Gamepath
                 if (userPath == "a")
                 {
-
+                    GameLoop(path);
                 }
                 //File menu path
                 if (userPath == "b")
@@ -51,9 +51,20 @@ namespace lab03
                 throw;
             }
         }
-
+        /// <summary>
+        /// The basic game loop
+        /// </summary>
+        /// <param name="path"></param>
         public static void GameLoop(string path)
         {
+            string targetWord = GetRandWord(path);
+            bool loop = true;
+            Console.WriteLine("Let’s play!\nI’ve got a word ready for you.");
+            Console.WriteLine("Enter a letter to guess\nor\nEnter 1 to return the the main menu\nEnter 2 to give up and get a new word");
+            while(loop)
+            {
+
+            }
 
         }
         /// <summary>
@@ -216,6 +227,15 @@ namespace lab03
             Random rand = new Random();
             int wordindex = rand.Next(0, words.Length);
             return words[wordindex];
+        }
+        /// <summary>
+        /// Masks the string
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static string MaskString(string target)
+        {
+            
         }
     }
 }

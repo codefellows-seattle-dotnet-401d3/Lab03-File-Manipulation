@@ -1,6 +1,6 @@
 # unit test ATM
 
-A small app intended to explore unit testing.
+A small app intended to explore file minipulation.
 
 ## Getting Started
 
@@ -10,11 +10,13 @@ You will need to install and run VS2017 in order to run and use the app.
 
 ## Features
 
-This app emulates an AYM with balance check, deposit and withdraw features. Their is basic error checking to prevent a negetive balance but not much more. There is also basic exception handeling.
+This program offers full CRUD interaction with a file. The proggram uses the source file for a word guessing game. When finished the game will offer a masked word for the player to guess as well as the ability to view, add to, delete from and delete the file.
 
 ## Resources and Links
 
-I worked with Amanda Iverson.
+I worked with:
+Amanda Iverson
+Miya Lucas
 
 I also leveraged Stack overflow and the 7.0 in a nutshell publication. 
 
