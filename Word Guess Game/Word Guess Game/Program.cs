@@ -5,8 +5,6 @@ namespace Word_Guess_Game
 {
     class Program
     {
-        
-
         static void Main(string[] args)
         {
             // Persist the main menu
@@ -16,15 +14,15 @@ namespace Word_Guess_Game
                 displayMenu = MainMenu();
             }
         }
-        static string[] words = new string[] { "Each", "time", "new", "game", "session", "starts" };
-        StringBuilder guesses = new StringBuilder(""); // The letters guessed by the user so far
-        static int tries = 15;
+        public static string[] words = new string[] { "each", "time", "new", "game", "session", "starts" };
+        public static StringBuilder guesses = new StringBuilder(""); // The letters guessed by the user so far
+        static int tries = 1000; // Set to a high number for testing (debugging) purposes
 
         /// <summary>
         /// Main Menu, display and IO
         /// </summary>
-        /// <returns>Returns nothing</returns>
-        private static bool MainMenu()
+        /// <returns>Returns false</returns>
+        public static bool MainMenu()
         {
             string answer;
 
@@ -35,23 +33,24 @@ namespace Word_Guess_Game
 
             while (tries > 0)
             {
-                Display(word, guesses, tries);
+                Display(word, guesses.ToString(), tries);
                 answer = Console.ReadLine();
+                guesses.Append(answer); // Adds the guessed letter to the end of the guesses WordBuilder string
                 tries--;
             }
-            
+            return false;
         }
 
         /// <summary>
         /// The initial random pick of a word from the provided list
         /// </summary>
         /// <param name="words[]">The array of words to be chosen from randomly</param>
-        /// <returns>A random word from the list</returns>
-        public string SetInitial(words[])
+        /// <returns>A string of a random word from the list</returns>
+        public static string SetInitial(string[] words)
         {
             Random rnd = new Random();
-            int word = rnd.Next(0, words.Length);
-            return word;
+            int wordPos = rnd.Next(0, words.Length);
+            return words[wordPos];
         }
 
         /// <summary>
@@ -60,7 +59,7 @@ namespace Word_Guess_Game
         /// <param name="word">The word to be guessed by the user</param>
         /// <param name="guesses">The string of letters already guessed by the user</param>
         /// <returns>A console display of game progress</returns>
-        public string Display(word, guesses, tries)
+        public static void Display(string word, string guesses, int tries)
         {
             for (int i = 0; i < word.Length; i++)
             {
@@ -72,12 +71,15 @@ namespace Word_Guess_Game
                     }
                     else
                     {
-                        Console.Write(-);
+                        Console.Write("-");
                     }
                 }
-                Console.WriteLine("");
-                Console.WriteLine($"You have {tries} left.");
+
             }
+            Console.WriteLine("");
+            Console.WriteLine($"Guesses so far: {guesses.ToString()}");
+            Console.WriteLine($"You have {tries} left.");
+            return;
         }
         
     }
