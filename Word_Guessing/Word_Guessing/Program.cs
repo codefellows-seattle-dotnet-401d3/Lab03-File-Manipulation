@@ -10,26 +10,53 @@ namespace Class03Demo
         {
             Console.WriteLine("Hello World!");
             //calling the string my path so its a public main signature
-            string myPath = "..\\..\\..\\cats.txt";
+           // string myPath = "..\\..\\..\\cats.txt";
             //calling the string path and invoking the static void at the same time.
-            // CreateAFile(myPath);
-            ReadFile(myPath);
+           //  CreateAFile(myPath); --nEEDED
+           // ReadFile(myPath); --
 
-            Console.WriteLine("--adding stuff---");
-
-            upDateFile(myPath);
-            Console.WriteLine("--Reading the 2nd line--");
-
-            ReadFile(myPath);
+            //Console.WriteLine("--adding stuff---"); --nEEDED 
             
-            Console.ReadKey();
+            //upDateFile(myPath); --
+            //Console.WriteLine("--Reading the 2nd line--"); --nEEDED
 
-            DeleteFile(myPath);
+           //ReadFile(myPath);----nEEDED
+         
+            //note for deleting a file, read a file that dose't exist might throw an error. 
+           // DeleteFile(myPath);
+
+            //Console.ReadLine();
+
+            //UseSplit();
+            //Console.ReadLine();
+            
+            /*
+            /// Random Class 
+            /// bring in a random array and utilize an random index of an array [i], this rand gives random number between 
+            /// array = [0-11]
+             Random rand = new Random ();
+            rand.Next(0, 11);
+             Console.WriteLine(rand.Next(0, 11));
+            Console.ReadLine();
+            */
+
+            //shows Contain
+            string word = "coffee";
+            if (word.Contains("tt"))
+            {
+                Console.WriteLine($"there is a {word}");
+                
+            }
+            else
+            {
+                Console.WriteLine("Note really");
+            }
+            Console.ReadLine();
 
 
         }
 
-
+        //this is creating a file using the path in designated in the main method 
         static void CreateAFile(string path)
         {
             // my path is a direction in your solutions directory which tells where to put this .txt file
@@ -57,6 +84,8 @@ namespace Class03Demo
 
         }
 
+
+        // This is the signature method to read a document that exists in a path
         static void ReadFile(string path)
         {
             try
@@ -68,9 +97,8 @@ namespace Class03Demo
                     {
                         Console.WriteLine(s);
                     }
-                     
-                }
 
+                }
             }
             catch (Exception)
             {
@@ -80,6 +108,7 @@ namespace Class03Demo
 
         }
 
+        //this is the signature method to update the existing path with another text
         static void upDateFile(string path)
         {
             using (StreamWriter sw = File.AppendText(path))
@@ -88,138 +117,27 @@ namespace Class03Demo
             }
         }
 
+        // This is the signature method to delete the path string
         static void DeleteFile(string path)
         {
             File.Delete(path);
         }
 
 
-     
-
-
-            
-            
-
-
-            //// CreateAFile(myPath);
-            // ReadFile(myPath);
-
-            // Console.WriteLine("---- ADDING IN A NAME---");
-
-            // UpdateFile(myPath);
-
-            // Console.WriteLine("---- READ IT OUT --");
-
-            // ReadFile(myPath);
-
-            // DeleteFile(myPath);
-
-            //  PracticeUsingSplit();
-
-            ////Show Random Class
-
-            //Random rand = new Random();
-            //int first = rand.Next(0, 11);
-            //Console.WriteLine(first);
-            //Console.WriteLine(rand.Next(0, 11));
-            //Console.WriteLine(rand.Next(0, 11));
-            //Console.WriteLine(rand.Next(0, 11));
-
-
-            // show Contains
-
-            /*string word = "coffee";
-
-            if (word.Contains("O"))
-            {
-                Console.WriteLine($"there is an O in {word}");
-            }
-            else
-            {
-                Console.WriteLine("Nope");
-            }
-        }
-
-        public static void CreateAFile(string path)
+        //remembe dont apend to the file, just write onto the file, 
+        static void UseSplit()
         {
+            char[] delims = { ',', ',', ','};
+            string text = "words,words,words words.";
+            string[] words = text.Split(delims);
 
-            byte[] words = new UTF8Encoding(true).GetBytes("Hello Class");
-
-
-            try
+            foreach (string s in words)
             {
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    sw.Write("This is a test");
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            using (FileStream fs = File.Create(path))
-            {
-                fs.Write(words, 0, words.Length);
+                Console.WriteLine(s);
             }
 
         }
 
 
-        /*public static void ReadFile(string path)
-        {
-            try
-            {
-                using (StreamReader sr = File.OpenText(path))
-                {
-                    string s = "";
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        Console.WriteLine(s);
-                    }
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        /*
-        public static void UpdateFile(string path)
-        {
-            using (StreamWriter sw = File.AppendText(path))
-            {
-                sw.WriteLine(".NET is cool!");
-            }
-        }*/
-
-            /*public static void DeleteFile(string path)
-            {
-                File.Delete(path);
-            }*/
-
-            /*public static void PracticeUsingSplit()
-            {
-                char[] delims = { ' ', ',', '.', ':', '\t' };
-                string text = "one two three four five six seven";
-
-                string[] words = text.Split(' ');
-
-                foreach (string s in words)
-                {
-                    Console.WriteLine(s);
-
-                }
-            }*/
-        }
-
-
-
-       
-
-
-    
+     }
 }
