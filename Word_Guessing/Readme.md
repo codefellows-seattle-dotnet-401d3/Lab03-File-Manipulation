@@ -21,7 +21,7 @@ Josie Cat has requested that a "Word Guess Game" be built. The main idea of the 
 
 ## Example
 
-![alt text](http://url/to/img.png)
+![alt text](/Word_Guessing/WordGuess.JPG)
 
 <!-- Show them what looks like and how how to use the application.  -->
 
