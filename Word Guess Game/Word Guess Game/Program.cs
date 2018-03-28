@@ -35,7 +35,7 @@ namespace Word_Guess_Game
             string wordString = ReadFile(myPath); // Change to wordBuilder
             string[] words = ConvertString(wordString);
             string answer;
-            // Menu for adding/deleting words goes here
+
             bool menu = true;
             while (menu)
             {
@@ -47,9 +47,16 @@ namespace Word_Guess_Game
                 Console.WriteLine("5. Quit");
                 answer = Console.ReadLine();
 
-                // Add options here
+                // Not using 'switch... case' because 'break' is used to kick out of the while loop to continue control below
                 if (answer == "5")
                     return false;
+                if (answer == "3")
+                {
+                    Console.WriteLine("Enter word to delete");
+                    string word = Console.ReadLine();
+                    words = DeleteWord(words, word);
+                    RebuildFile(words, myPath);
+                }
                 if (answer == "4")
                 {
                     PrintDictionary(words);
@@ -58,7 +65,13 @@ namespace Word_Guess_Game
                 }
                 if (answer == "2")
                 {
-                    Console.WriteLine("You pressed 2");
+                    Console.WriteLine("Enter new word");
+                    string newWord = Console.ReadLine();
+                    UpdateFile(myPath, newWord);
+                    wordString = ReadFile(myPath); 
+
+                    words = ConvertString(wordString); // put new word into array
+
                 }
                 if (answer == "1")
                 {
@@ -83,9 +96,10 @@ namespace Word_Guess_Game
                     while (continueGame)
                     {
                         Console.WriteLine($"You have {tries} tries left.");
-                        continueGame = false; // Set to false to end if never set back to true
-                        answer = Console.ReadLine();
-
+                        continueGame = false; // Set to false to end in case it is never set back to true
+                        answer = Console.ReadLine(); // TODO: accept only one character, or limit to first character
+                        // TODO try... catch for non-alphabetc entries
+                        answer = answer.ToLower(); // make all lower case letters
                         guesses.Append(answer); // Adds the guessed letter to the end of the guesses WordBuilder string
                         Display(word, guesses.ToString(), tries);
                         tries--;
@@ -151,44 +165,49 @@ namespace Word_Guess_Game
                 }
             }
 
-            Console.WriteLine(""); // cariage return
+            Console.WriteLine(); // cariage return
             Console.WriteLine($"Guesses so far: {guesses.ToString()}");
 
             return;
         }
 
-        public static void CreateAFile(string path)
-        {
+        //Demo Code:
+        //public static void CreateAFile(string path)
+        //{
 
 
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    sw.Write("This is a test");
-                }
-            }
-            catch (Exception)
-            {
+        //    try
+        //    {
+        //        using (StreamWriter sw = new StreamWriter(path))
+        //        {
+        //            sw.Write("This is a test");
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
+        //        throw;
+        //    }
 
-            using (FileStream fs = File.Create(path))
-            {
-                //fs.Write(words, 0, words.Length); // Error: cannot convert from 'string[]' to 'byte[]'
-            }
+        //    using (FileStream fs = File.Create(path))
+        //    {
+        //        //fs.Write(words, 0, words.Length); // Error: cannot convert from 'string[]' to 'byte[]'
+        //    }
 
-        }
+        //}
 
-
+        /// <summary>
+        /// Reads file
+        /// </summary>
+        /// <param name="path">DOS path to file location</param>
+        /// <returns></returns>
         public static string ReadFile(string path)
         {
             try
             {
                 using (StreamReader sr = File.OpenText(path))
                 {
-                    StringBuilder builtWord = new StringBuilder(""); // The dictionary file
+                    StringBuilder builtWord = new StringBuilder(""); // The dictionary file, built one letter at a time
 
                     string s = "";
                     while ((s = sr.ReadLine()) != null)
@@ -208,18 +227,43 @@ namespace Word_Guess_Game
             }
         }
 
-        public static void UpdateFile(string path)
+        /// <summary>
+        /// Adds words to the dictionary file on disc.
+        /// </summary>
+        /// <param name="path">DOS path location of file</param>
+        /// <param name="newWord">The new word to be added</param>
+        public static void UpdateFile(string path, string newWord)
         {
             using (StreamWriter sw = File.AppendText(path))
             {
-                sw.WriteLine(".NET is cool!");
+                sw.WriteLine(" " + newWord);
             }
         }
 
-        public static void DeleteFile(string path)
+        /// <summary>
+        /// Deletes, then rebuilds file to match the list in the array
+        /// </summary>
+        /// <param name="words">Word list array</param>
+        /// <param name="path">DOS path for file</param>
+        public static void RebuildFile(string[] words, string path)
         {
             File.Delete(path);
+
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                for (int i = 0; i < (words.Length - 1); i++)
+                {
+                    sw.Write(words[i] + " ");
+                }
+                sw.Write(words[words.Length - 1]); // Enter last word without space at the end.
+            }
         }
+
+        //Demo Code
+        //public static void DeleteFile(string path)
+        //{
+        //    File.Delete(path);
+        //}
 
         /// <summary>
         /// Converts a string of words seperated by spaces to an array
@@ -233,7 +277,7 @@ namespace Word_Guess_Game
             {
                 // count the spaces
                 if (wordString[i] == Convert.ToChar(" "))
-                    counter ++;              
+                    counter ++; // Next array index
             }
 
             string[] word = new string[counter + 1]; // Set to total number of words.  There is one more word than spaces.
@@ -243,9 +287,9 @@ namespace Word_Guess_Game
             {
                 if (wordString[i] == Convert.ToChar(" "))
                 {
-                    // there is a space
+                    // there is a space character
                     word[counter] = progress.ToString(); // add word to array
-                    counter++; // Next array member
+                    counter++; // Next array index
                     progress.Length = 0; // clear out progress
                 }
                 else // There is not a space.  build up word in progress
@@ -259,6 +303,45 @@ namespace Word_Guess_Game
         }
 
         /// <summary>
+        /// Deletes a word from the list
+        /// </summary>
+        /// <param name="words">Array containing the word list</param>
+        /// <param name="word">Word to be removed</param>
+        public static string[] DeleteWord(string[] words, string word)
+        {
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i] == word)
+                {
+                    for (int j = i; j < (words.Length - 1); j++)
+                    {
+                        words[j] = words[j + 1]; 
+                    }
+                    int index = i;
+                    break;
+                }
+            }
+
+            words = CompressArray(words, words.Length);
+            return words;
+        }
+
+        /// <summary>
+        /// Removes last item from array
+        /// </summary>
+        /// <returns>Compressed array</returns>
+        public static string[] CompressArray(string[] oldArray, int length)
+        {
+            string[] word = new string[length - 1];
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                word[i] = oldArray[i];
+            }
+            return word;
+        }
+
+        /// <summary>
         /// Prints the contents of the dictionary
         /// </summary>
         /// <param name="words">The array containing the word list</param>
@@ -268,7 +351,7 @@ namespace Word_Guess_Game
             {
                 Console.Write(words[i] + " ");
             }
-            Console.WriteLine(""); // Carriage return
+            Console.WriteLine(); // Carriage return
         }
 
     }
