@@ -270,6 +270,7 @@ namespace lab03
                 {
                     targetBuilder.Append("*");
                 }
+                //Unmask letters based on guesses.
                 for (int i = 0; i < guessArray.Length; i++)
                 {
                     if (targetWord.Contains(guessArray[i]))
@@ -311,7 +312,6 @@ namespace lab03
                     newArray[i] = guessArray[i];
                 }
             }
-
             return newArray;
         }
     }
