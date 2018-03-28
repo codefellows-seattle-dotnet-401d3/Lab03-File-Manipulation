@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Word_Guessing", "Word_Guessing\Word_Guessing.csproj", "{BC623FEE-B698-4BF5-90C5-1A255A028836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Word_Guessing", "Word_Guessing\Word_Guessing.csproj", "{BC623FEE-B698-4BF5-90C5-1A255A028836}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B6DB653-13E7-420F-AC71-2663D58564A5}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{6B56DA11-3AAA-46D0-BFCB-3AFC1F8DAE58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{BC623FEE-B698-4BF5-90C5-1A255A028836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC623FEE-B698-4BF5-90C5-1A255A028836}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC623FEE-B698-4BF5-90C5-1A255A028836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B56DA11-3AAA-46D0-BFCB-3AFC1F8DAE58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B56DA11-3AAA-46D0-BFCB-3AFC1F8DAE58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B56DA11-3AAA-46D0-BFCB-3AFC1F8DAE58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B56DA11-3AAA-46D0-BFCB-3AFC1F8DAE58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
