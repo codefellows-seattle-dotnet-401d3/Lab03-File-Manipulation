@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Word_Guess_Game
 {
-    class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -19,7 +19,7 @@ namespace Word_Guess_Game
         
         //public static string[] words = new string[] { "each", "time", "new", "game", "session", "starts" };
         public static StringBuilder guesses = new StringBuilder(""); // The letters guessed by the user so far
-        static int tries = 1000; // Set to a high number for testing (debugging) purposes
+        static int tries = 10; // Variable declaration only. This number will be overridden in main body
         public static bool continueGame = true;  // Set to true so that it runs the first time
 
 
@@ -46,7 +46,18 @@ namespace Word_Guess_Game
                 Console.WriteLine("4. See dictionary");
                 Console.WriteLine("5. Quit");
                 answer = Console.ReadLine();
+                if (answer == null)
+                {
+                    try
+                    {
 
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
                 // Not using 'switch... case' because 'break' is used to kick out of the while loop to continue control below
                 if (answer == "5")
                     return false;
@@ -83,7 +94,7 @@ namespace Word_Guess_Game
             bool metaPlay = true;
             while (metaPlay)
             {
-                tries = 1000; // repeated here for replay ability
+                tries = 10; // Number of tries allowed
                 guesses = new StringBuilder(""); // repeated here for replay ability
                 string word = SetInitial(words);
 
@@ -97,9 +108,11 @@ namespace Word_Guess_Game
                     {
                         Console.WriteLine($"You have {tries} tries left.");
                         continueGame = false; // Set to false to end in case it is never set back to true
-                        answer = Console.ReadLine(); // TODO: accept only one character, or limit to first character
+                        answer = Console.ReadLine(); // Read for a character
                         // TODO try... catch for non-alphabetc entries
                         answer = answer.ToLower(); // make all lower case letters
+                        if (answer.Length > 0) // Has to be at least one character entered
+                            answer = answer[0].ToString(); // pick only the first character
                         guesses.Append(answer); // Adds the guessed letter to the end of the guesses WordBuilder string
                         Display(word, guesses.ToString(), tries);
                         tries--;
