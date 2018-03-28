@@ -116,6 +116,8 @@ namespace Word_Guess_Game
                         guesses.Append(answer); // Adds the guessed letter to the end of the guesses WordBuilder string
                         Display(word, guesses.ToString(), tries);
                         tries--;
+                        if (tries <= 0) // Bug fix.  control was never passed back to 'while tries'.
+                            break;  
                     }
                     tries = 0; // Run out 'tries' to trip the end of the game
                 }
