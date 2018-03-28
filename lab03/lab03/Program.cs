@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.IO;
 
 namespace lab03
@@ -58,14 +59,40 @@ namespace lab03
         public static void GameLoop(string path)
         {
             string targetWord = GetRandWord(path);
+            string[] guessArray = new string[0];
             bool loop = true;
             Console.WriteLine("Let’s play!\nI’ve got a word ready for you.");
             Console.WriteLine("Enter a letter to guess\nor\nEnter 1 to return the the main menu\nEnter 2 to give up and get a new word");
-            while(loop)
+            while (loop)
             {
+                Console.WriteLine(); //Console formatting
+                Console.WriteLine("The word is ");
+                Console.WriteLine(MaskString(targetWord, guessArray));
+                Console.WriteLine("What is your guess? If you think you know the word type it in!");
+                string guess = Console.ReadLine().ToLower();
+                if (guess == targetWord)
+                {
+                    Console.WriteLine("That's it! Good job!");
+                    loop = false;
+                }
+                if (targetWord.Contains(guess))
+                {
+                    Console.WriteLine($"Yes the word has {guess}");
+                }
+                if (guess == "1")
+                {
+                    loop = false;
+                }
+                if (guess == "2")
+                {
+                    targetWord = GetRandWord(path);
+                    Console.WriteLine("OK new word it is!");
+                    Console.WriteLine(); //Console formating
+                }
+                guessArray = GuessArrayBuilder(guessArray, guess);
 
             }
-
+            MenuLoop(path);
         }
         /// <summary>
         /// Runs the file menu
@@ -83,7 +110,7 @@ namespace lab03
                     //Pull the current words list
                     string[] words = GetWordList(path);
                     //Print current word list to console
-                    for (int i = 0; i < words.Length-1; i++)
+                    for (int i = 0; i < words.Length - 1; i++)
                     {
                         Console.WriteLine(words[i]);
                         Console.WriteLine(); //Console formatting
@@ -233,9 +260,59 @@ namespace lab03
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static string MaskString(string target)
+        public static string MaskString(string targetWord, string[] guessArray)
         {
-            
+            try
+            {
+                StringBuilder targetBuilder = new StringBuilder("");
+                //Build the correct length mask
+                for (int i = 0; i < targetWord.Length; i++)
+                {
+                    targetBuilder.Append("*");
+                }
+                for (int i = 0; i < guessArray.Length; i++)
+                {
+                    if (targetWord.Contains(guessArray[i]))
+                    {
+                        for (int j = 0; j <= targetWord.Length - 1; j++)
+                        {
+                            if (targetWord[j].ToString() == guessArray[i])
+                            {
+                                targetBuilder.Replace("*", guessArray[i], j, 1);
+                            }
+                        }
+                    }
+                }
+                return targetBuilder.ToString();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Bulds the array of guesses to compare
+        /// </summary>
+        /// <param name="guessArray"></param>
+        /// <param name="newValue"></param>
+        /// <returns></returns>
+        public static string[] GuessArrayBuilder(string[] guessArray, string newValue)
+        {
+            string[] newArray = new string[guessArray.Length + 1];
+            for (int i = 0; i < newArray.Length; i++)
+            {
+                if (i == newArray.Length-1)
+                {
+                    newArray[i] = newValue;
+                }
+                else
+                {
+                    newArray[i] = guessArray[i];
+                }
+            }
+
+            return newArray;
         }
     }
 }
