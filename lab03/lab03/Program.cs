@@ -62,35 +62,44 @@ namespace lab03
             string[] guessArray = new string[0];
             bool loop = true;
             Console.WriteLine("Let’s play!\nI’ve got a word ready for you.");
-            Console.WriteLine("Enter a letter to guess\nor\nEnter 1 to return the the main menu\nEnter 2 to give up and get a new word");
+           
             while (loop)
             {
-                Console.WriteLine(); //Console formatting
+                Console.Clear();
                 Console.WriteLine("The word is ");
                 Console.WriteLine(MaskString(targetWord, guessArray));
-                Console.WriteLine("What is your guess? If you think you know the word type it in!");
+                Console.WriteLine("Gesses: " + StringGuessArray(guessArray));
+                Console.WriteLine("Enter a letter to guess\nor\nEnter 1 to return the the main menu\nEnter 2 to give up and get a new word");
+                Console.WriteLine("If you think you know the word type it in!");
                 string guess = Console.ReadLine().ToLower();
                 if (guess == targetWord)
                 {
                     Console.WriteLine("That's it! Good job!");
                     loop = false;
                 }
-                if (targetWord.Contains(guess))
+                if (guess.Length > 2)
                 {
-                    Console.WriteLine($"Yes the word has {guess}");
+                    Console.WriteLine("I'm sorry you can only guess up to 2 letters at a time or the full word.");
+                    Console.ReadLine();
                 }
-                if (guess == "1")
+                else
                 {
-                    loop = false;
+                    if (targetWord.Contains(guess))
+                    {
+                        Console.WriteLine($"Yes the word has {guess}");
+                    }
+                    if (guess == "1")
+                    {
+                        loop = false;
+                    }
+                    if (guess == "2")
+                    {
+                        targetWord = GetRandWord(path);
+                        Console.WriteLine("OK new word it is!");
+                        Console.WriteLine(); //Console formating
+                    }
+                    guessArray = GuessArrayBuilder(guessArray, guess);
                 }
-                if (guess == "2")
-                {
-                    targetWord = GetRandWord(path);
-                    Console.WriteLine("OK new word it is!");
-                    Console.WriteLine(); //Console formating
-                }
-                guessArray = GuessArrayBuilder(guessArray, guess);
-
             }
             MenuLoop(path);
         }
@@ -313,6 +322,16 @@ namespace lab03
                 }
             }
             return newArray;
+        }
+
+        public static string StringGuessArray(string[] guessArray)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (string item in guessArray)
+            {
+                sb.Append($"{item} ");
+            }
+            return sb.ToString();
         }
     }
 }
