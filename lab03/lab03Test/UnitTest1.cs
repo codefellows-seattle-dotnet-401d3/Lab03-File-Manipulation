@@ -24,5 +24,24 @@ namespace lab03Test
         {
             Assert.Equal(expected, MaskString(target, guesses));
         }
+
+        [Theory]
+        [InlineData("u", new string[] { "g", "b" }, new string[] { "g", "b", "u" })]
+        [InlineData("s", new string[] { "g", "b", "u" }, new string[] { "g", "b", "u", "s" })]
+        [InlineData("t", new string[] { "g", "b", "u", "s" }, new string[] { "g", "b", "u", "s", "t" })]
+
+        public void CanBuildGUessArray(string newValue, string[] guessArray, string[] expected)
+        {
+            Assert.Equal(expected, GuessArrayBuilder(guessArray, newValue));
+        }
+
+        [Theory]
+        [InlineData(new string[] { "g", "b" }, "g b ")]
+        [InlineData(new string[] { "g", "b", "u" }, "g b u ")]
+
+        public void CanStringGUessArray(string[] guessArray, string expected)
+        {
+            Assert.Equal(expected, StringGuessArray(guessArray));
+        }
     }
 }
