@@ -46,6 +46,13 @@ namespace XUnitTestProject1
             Assert.Equal("this", Program.SetInitial(anotherArray));
         }
 
+        [Fact]
+        public void Test3()
+        {
+            string[] thirdArray = new string[] { "yelp" };
+            Assert.Equal("yelp", Program.SetInitial(thirdArray));
+        }
+
 
     }
 }
