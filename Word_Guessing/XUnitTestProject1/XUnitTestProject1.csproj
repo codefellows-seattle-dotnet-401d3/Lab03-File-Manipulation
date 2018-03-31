@@ -13,4 +13,8 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Word_Guessing\Word_Guessing.csproj" />
+  </ItemGroup>
+
 </Project>
