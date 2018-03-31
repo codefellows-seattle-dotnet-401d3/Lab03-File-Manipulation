@@ -1,0 +1,63 @@
+# Created by https://www.gitignore.io/api/linux,macos,windows,visualstudio,visualstudiocode
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+/Lab03-File-Manipulation/UnitTestsForFileManipulation/obj/Debug/netcoreapp2.0/UnitTestsForFileManipulation.Program.cs
+/Lab03-File-Manipulation/UnitTestsForFileManipulation/obj/Debug/netcoreapp2.0/UnitTestsForFileManipulation.csprojResolveAssemblyReference.cache
+/Lab03-File-Manipulation/UnitTestsForFileManipulation/obj/Debug/netcoreapp2.0/UnitTestsForFileManipulation.csproj.CoreCompileInputs.cache
+/Lab03-File-Manipulation/UnitTestsForFileManipulation/obj/Debug/netcoreapp2.0/UnitTestsForFileManipulation.AssemblyInfoInputs.cache
+/Lab03-File-Manipulation/UnitTestsForFileManipulation/obj/Debug/netcoreapp2.0/UnitTestsForFileManipulation.AssemblyInfo.cs
+/Lab03-File-Manipulation/Lab03-File-Manipulation/obj/Debug/netcoreapp2.0/Lab03-File-Manipulation.csprojResolveAssemblyReference.cache
+/Lab03-File-Manipulation/Lab03-File-Manipulation/obj/Debug/netcoreapp2.0/Lab03-File-Manipulation.csproj.FileListAbsolute.txt
+/Lab03-File-Manipulation/Lab03-File-Manipulation/obj/Debug/netcoreapp2.0/Lab03-File-Manipulation.csproj.CoreCompileInputs.cache
+/Lab03-File-Manipulation/Lab03-File-Manipulation/obj/Debug/netcoreapp2.0/Lab03-File-Manipulation.AssemblyInfoInputs.cache
+/Lab03-File-Manipulation/Lab03-File-Manipulation/obj/Debug/netcoreapp2.0/Lab03-File-Manipulation.AssemblyInfo.cs
+/Lab03-File-Manipulation/.vs/Lab03-File-Manipulation/v15
+/Lab03-File-Manipulation/Lab03-File-Manipulation/bin/Debug/netcoreapp2.0
+/Lab03-File-Manipulation/Lab03-File-Manipulation/obj
+/Lab03-File-Manipulation/UnitTestsForFileManipulation/obj
