@@ -34,7 +34,7 @@ namespace XUnitTestProject1
         public void Test1()
         {
             string [] newarray = new string[] { "josh" };
-            Assert.Equal("josh", Program.SetInitial(newarray));
+            Assert.Equal("josh", SetInitial(newarray));
         }
 
 
@@ -43,21 +43,28 @@ namespace XUnitTestProject1
         public void Test2()
         {
             string[] anotherArray = new string[] { "this" };
-            Assert.Equal("this", Program.SetInitial(anotherArray));
+            Assert.Equal("this", SetInitial(anotherArray));
         }
 
         [Fact]
         public void Test3()
         {
             string[] thirdArray = new string[] { "yelp" };
-            Assert.Equal("yelp", Program.SetInitial(thirdArray));
+            Assert.Equal("yelp", SetInitial(thirdArray));
         }
 
         [Fact]
         public void Test4()
         {
             string[] arrayOne = new string[] { "jess" };
-            Assert.Equal("jess", Program.SetInitial(arrayOne));
+            Assert.Equal("jess", SetInitial(arrayOne));
+        }
+
+        [Fact]
+        public void Test5()
+        {
+            string[] six = new string[] { "two"};
+            Assert.Equal("two", SetInitial(six));
         }
 
     }
