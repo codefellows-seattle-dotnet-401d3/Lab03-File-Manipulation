@@ -53,6 +53,12 @@ namespace XUnitTestProject1
             Assert.Equal("yelp", Program.SetInitial(thirdArray));
         }
 
+        [Fact]
+        public void Test4()
+        {
+            string[] arrayOne = new string[] { "jess" };
+            Assert.Equal("jess", Program.SetInitial(arrayOne));
+        }
 
     }
 }
